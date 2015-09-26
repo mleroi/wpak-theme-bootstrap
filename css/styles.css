@@ -1,3 +1,15 @@
+
+/** Specific CSS for custom transitions */
+#app-content-wrapper{
+    position: relative;
+}
+
+.app-page{
+    width: 100%;
+    -webkit-backface-visibility: hidden
+}
+/** /End custom transitions */
+
 #waiting{ 
 	z-index:1000;
 	background-color: #ddd;
