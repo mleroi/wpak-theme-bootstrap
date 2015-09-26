@@ -40,7 +40,7 @@ define( function ( require ) {
 		//Add $next to the end of the wrapper (still invisible)
 		$wrapper.append( $next );
 
-		//Animate $wrapper to make $next appear from left to right
+		//Animate $wrapper to make $next appear from right to left
 		$wrapper.animate(
 				{ left: '-100%' },
 				config.delay,
@@ -86,7 +86,7 @@ define( function ( require ) {
 			width: '100%'
 		} );
 
-		//Add $next to the right of the wrapper (still invisible)
+		//Add $next to the left of the wrapper (still invisible)
 		$wrapper.prepend( $next );
 
 		//Animate $wrapper to make $next appear from left to right
