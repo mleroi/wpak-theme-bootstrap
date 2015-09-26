@@ -1,4 +1,45 @@
-define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/storage', 'theme/js/bootstrap.min' ], function( $, App, TemplateTags, Storage ) {
+define( [ 'jquery', 'core/phonegap/file-system', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/storage', 'theme/js/bootstrap.min' ], function( $, Files, App, TemplateTags, Storage ) {
+
+	
+	$( '.download' ).click( function (e) {
+		e.preventDefault();
+		
+		var download_file = $(this).data('download-file');
+		var download_id = $(this).data('id');
+		var $feedback = $('#download-feedback-'+ download_id);
+		
+		$feedback.html('Downloading...');
+		
+		Files.download(
+			download_file,
+			{
+				ok: function() {
+					$feedback.html('Downloaded OK :)');
+				},
+				progress_percent: function( progress ) {
+					$feedback.html('Downloading... '+ progress + '%');
+				}
+			}
+		);
+
+	} );
+	
+	$( '.download' ).each( function() {
+		var download_file = $(this).data('download-file');
+		var download_id = $(this).data('id');
+		var $feedback = $('#download-feedback-'+ download_id);
+		
+		Files.downloadExists(
+			download_file,
+			function() {
+				$feedback.html('Exists!');
+			},
+			function() {
+				$feedback.html('INexists...');
+			}
+		);
+		
+	} );
 
 	/**
 	 * Launch app contents refresh when clicking the refresh button :
