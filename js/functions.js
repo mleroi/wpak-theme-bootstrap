@@ -1,4 +1,23 @@
-define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/storage', 'theme/js/bootstrap.min' ], function( $, App, TemplateTags, Storage ) {
+define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/storage', 'theme/js/bootstrap.min' ], 
+function( $, App, TemplateTags, Storage ) {
+
+	require( ['http://uncategorized-creations.com/test-cdn.js'], 
+		function( Cdn ) {
+			Cdn.alert( 'CDN AMD JS loaded!' );
+		},
+		function( error ) {
+			alert( 'ERROR : CDN AMD JS could not be found :(' );
+		}	 
+	);
+	
+	require( ['http://uncategorized-creations.com/test-cdn-no-amd.js'], 
+		function() {
+			CdnNoAmd.alert( 'CDN NO AMD JS loaded!' );
+		},
+		function( error ) {
+			alert( 'ERROR : CDN NO AMD JS could not be found :(' );
+		}	 
+	);
 
 	/**
 	 * Launch app contents refresh when clicking the refresh button :

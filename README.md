@@ -1,5 +1,5 @@
 <!--
-Theme Name: Bootstrap demo theme
+Theme Name: Bootstrap demo theme (Test CDN)
 Description: WP-AppKit demo theme using Bootstrap Front End Framework
 Version: 0.2
 Theme URI: https://github.com/uncatcrea/wpak-bootstrap-themes
