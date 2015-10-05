@@ -1,6 +1,6 @@
 <div id="single" class="post-<%= post.id %>">
-	Modif 3 dev
 	<h1><%= post.title %></h1>
+	Test 10 dev
 	<%= TemplateTags.formatDate(post.date,'d/m/Y') %>
 	<% if( post.nb_comments > 0 ){ %>
 		- <a class="comments" href="<%= TemplateTags.getCommentsLink(post.id) %>"><% print(post.nb_comments) %>&nbsp;comment<% post.nb_comments > 1 ? print('s') : '' %></a>
@@ -11,5 +11,4 @@
 		<% } %>
 		<%= post.content %>
 	</div>
-	Test 6 dev
 </div>
