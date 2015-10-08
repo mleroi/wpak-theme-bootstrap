@@ -9,7 +9,7 @@ define(['jquery','core/theme-app','core/modules/storage','theme/js/transitions',
 	 
 	App.setParam('custom-page-rendering', true);
 	
-	App.action('screen-transition',function($deferred,$wrapper,$current,$next,current_page,previous_page){
+	App.action('screen-transition',function($wrapper,$current,$next,current_page,previous_page,$deferred){
 		
 		var direction = App.getTransitionDirection(current_page,previous_page); //Or define your own direction function!
 		
