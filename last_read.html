@@ -1,0 +1,20 @@
+<div>
+    <h1>Last read</h1>
+    <% 
+        //Sort by reverse "last read date" order:
+        var last_read = _.sortBy( last_read, function( item ) { return -item.last_read_time; } );
+    %>
+    <ul>
+        <% _.each( last_read, function( read_info ) { %>
+            <% 
+                //Retrieve the game from its id and display it:
+                var post = App.getItem( read_info.id );
+                if ( post ) {
+                    %>
+                    <li><%= post.title %> (read <%= read_info.nb_time_read %> times)</li>
+                    <%
+                }
+            %>
+        <% } ); %>
+    </ul>
+</div>

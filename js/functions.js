@@ -1,4 +1,46 @@
-define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/storage', 'theme/js/bootstrap.min' ], function( $, App, TemplateTags, Storage ) {
+define( [ 'jquery', 'core/theme-app', 'core/theme-tpl-tags', 'core/modules/storage', 'core/modules/persistent-storage', 'core/modules/search', 'theme/js/bootstrap.min' ], function( $, App, TemplateTags, Storage, PersistentStorage, Search ) {
+
+	App.addCustomRoute( 'last_read', 'last_read' ) ;
+
+	App.on( 'screen:showed', function( current_screen, view ) {
+
+		if ( current_screen.screen_type == 'single' ) {
+
+			var date = new Date();
+			var last_read_time = date.getTime();
+			
+			var last_read_info = PersistentStorage.get( 'last_read',  current_screen.item_id );
+			
+			if ( last_read_info ) {
+				last_read_info.nb_time_read++;
+				last_read_info.last_read_time = last_read_time;
+			} else {
+				last_read_info = { 
+					nb_time_read: 1,
+					last_read_time: last_read_time,
+					id: current_screen.item_id
+				};
+			}
+			
+			PersistentStorage.set( 'last_read',  current_screen.item_id, last_read_info );
+		}
+		
+	} );
+
+	App.filter( 'template-args', function( template_args, view_type, view_template ) { 
+		if( view_template == 'last_read' ) {
+			template_args.last_read = PersistentStorage.get( 'last_read' );
+			template_args.App = App;
+		}
+		return template_args;
+	} );
+	
+	App.on( 'info:app-ready', function() { 
+		var query_args = {};
+		query_args.s = 'javascript';
+		var search_results = Search.query( query_args );
+		console.log( search_results );
+	} );
 
 	/**
 	 * Launch app contents refresh when clicking the refresh button :
