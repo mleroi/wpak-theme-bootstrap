@@ -15,9 +15,8 @@ define( function ( require ) {
 	};
 
 	/**
-	 * Defines what to do with DOM when a "left" transition direction is triggered.
-	 * The "left" transition is triggered when we can imagine that we would have slid our 
-	 * finger to the left to make the transition.
+	 * Defines what to do with DOM when a "next-screen" transition direction is triggered.
+	 * The "next-screen" transition is triggered when for example you go from a list to a single.
 	 * See theme-app.js::getTransitionDirection() to see on what conditions this happens.
 	 * And http://uncategorized-creations.com/wp-appkit/doc/#359-page-transitions for doc.
 	 * 
@@ -26,7 +25,7 @@ define( function ( require ) {
 	 * @param {jQuery DOM element} $next : DOM element for the screen that is (going to be) displayed after transition.
 	 * @param {jQuery deffered Object} $deferred : must be resolved at the end of the transition.
 	 */
-	transitions.slideLeft = function ( $wrapper, $current, $next, $deferred ) {
+	transitions.slideNextScreen = function ( $wrapper, $current, $next, $deferred ) {
 		
 		//Set $next DOM element to the right of the screen (invisible) :
 		$next.css( {
@@ -64,9 +63,8 @@ define( function ( require ) {
 	}
 
 	/**
-	 * Defines what to do with DOM when a "right" transition direction is triggered.
-	 * The "right" transition is triggered when we can imagine that we would have slid our 
-	 * finger to the right to make the transition.
+	 * Defines what to do with DOM when a "previous-screen" transition direction is triggered.
+	 * The "previous-screen" transition is triggered when for example you go back from a single to a list.
 	 * See theme-app.js::getTransitionDirection() to see on what conditions this happens.
 	 * And http://uncategorized-creations.com/wp-appkit/doc/#359-page-transitions for doc.
 	 * 
@@ -75,7 +73,7 @@ define( function ( require ) {
 	 * @param {jQuery DOM element} $next : DOM element for the screen that is (going to be) displayed after transition.
 	 * @param {jQuery deffered Object} $deferred : must be resolved at the end of the transition.
 	 */
-	transitions.slideRight = function ( $wrapper, $current, $next, $deferred ) {
+	transitions.slidePreviousScreen = function ( $wrapper, $current, $next, $deferred ) {
 		
 		//Set $next DOM element to the left of the screen (invisible) :
 		$next.css( {
@@ -113,8 +111,8 @@ define( function ( require ) {
 	};
 	
 	/**
-	 * Defines what to do with DOM when a "replace" transition direction is triggered.
-	 * The "replace" transition is triggered when no other transition type could be identified.
+	 * Defines what to do with DOM when a "default" transition direction is triggered.
+	 * The "default" transition is triggered when no other transition type could be identified.
 	 * See theme-app.js::getTransitionDirection() to see on what conditions this happens.
 	 * And http://uncategorized-creations.com/wp-appkit/doc/#359-page-transitions for doc.
 	 * 
@@ -123,7 +121,7 @@ define( function ( require ) {
 	 * @param {jQuery DOM element} $next : DOM element for the screen that is (going to be) displayed after transition.
 	 * @param {jQuery deffered Object} $deferred : must be resolved at the end of the transition.
 	 */
-	transitions.replace = function ( $wrapper, $current, $next, $deferred ) {
+	transitions.default = function ( $wrapper, $current, $next, $deferred ) {
 		$current.remove();
 		$wrapper.empty().append( $next );
 		$deferred.resolve();

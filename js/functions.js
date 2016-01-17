@@ -1,21 +1,23 @@
 define(['jquery','core/theme-app','core/modules/storage','theme/js/transitions','theme/js/bootstrap.min'],function($,App,Storage,Transitions){
 	
-	//If left/right/replace transitions types are ok for you, use App.setAutoScreenTransitions()
+	//If previous/next/default transitions types are enough for you, use App.setAutoScreenTransitions()
 	//passing your customized Transitions module (see js/transitions.js) to it :
-	App.setAutoScreenTransitions( Transitions.replace, Transitions.slideLeft, Transitions.slideRight );
+	App.setAutoScreenTransitions( Transitions.default, Transitions.slidePreviousScreen, Transitions.slideNextScreen );
 	
 	/*
-	Or, to handle screen transitions manually (in a case where left/right/replace transitions types are not enough) use :
+	Or, to handle screen transitions manually (in a case where previous/next/default transitions types are not enough) use :
 	 
 	App.setParam('custom-page-rendering', true);
 	
 	App.action('screen-transition',function($wrapper,$current,$next,current_page,previous_page,$deferred){
 		
-		var direction = App.getTransitionDirection(current_page,previous_page); //Or define your own direction function!
+		//Define your own direction function, or use :
+		var direction = App.getTransitionDirection(current_page,previous_page); 
+		//along with the 'transition-direction' filter to add your own custom directions to default ones.
 		
 		switch(direction){
-			case 'left':
-				Transitions.yourTransitionModuleLeftTransition($wrapper,$current,$next,$deferred);
+			case 'previous':
+				Transitions.yourTransitionModulePreviousScreenTransition($wrapper,$current,$next,$deferred);
 				break;
 			case 'your-custom-direction':
 				Transitions.yourTransitionModuleCustomDirectionTransition($wrapper,$current,$next,$deferred);
