@@ -1,32 +1,29 @@
 define(['jquery','core/theme-app','core/modules/storage','theme/js/transitions','theme/js/bootstrap.min'],function($,App,Storage,Transitions){
 	
-	//If previous/next/default transitions types are enough for you, use App.setAutoScreenTransitions()
-	//passing your customized Transitions module (see js/transitions.js) to it :
-	App.setAutoScreenTransitions( Transitions.default, Transitions.slidePreviousScreen, Transitions.slideNextScreen );
-	
-	/*
-	Or, to handle screen transitions manually (in a case where previous/next/default transitions types are not enough) use :
-	 
-	App.setParam('custom-page-rendering', true);
-	
-	App.action('screen-transition',function($wrapper,$current,$next,current_page,previous_page,$deferred){
-		
-		//Define your own direction function, or use :
-		var direction = App.getTransitionDirection(current_page,previous_page); 
-		//along with the 'transition-direction' filter to add your own custom directions to default ones.
-		
-		switch(direction){
-			case 'previous':
-				Transitions.yourTransitionModulePreviousScreenTransition($wrapper,$current,$next,$deferred);
+	//Set custom-screen-rendering param to true so that screen rendering
+	//uses the 'screen-transition' action to render :
+	App.setParam( 'custom-screen-rendering', true );
+
+	App.action( 'screen-transition', function( $wrapper, $current, $next, current_screen, previous_screen, $deferred ) {
+
+		var direction = App.getTransitionDirection( current_screen, previous_screen );
+
+		switch ( direction ) {
+			case 'previous-screen':
+				Transitions.slidePreviousScreen( $wrapper, $current, $next, $deferred );
 				break;
-			case 'your-custom-direction':
-				Transitions.yourTransitionModuleCustomDirectionTransition($wrapper,$current,$next,$deferred);
+			case 'next-screen':
+				Transitions.slideNextScreen( $wrapper, $current, $next, $deferred );
 				break;
-			...
+			case 'default':
+				Transitions.default( $wrapper, $current, $next, $deferred );
+				break;
+			default:
+				Transitions.default( $wrapper, $current, $next, $deferred );
+				break;
 		};
-		
-	});
-	*/
+
+	} );
         
 	/**
 	 * Launch app contents refresh when clicking the refresh button :
