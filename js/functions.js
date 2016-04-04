@@ -4,9 +4,9 @@ define(['jquery','core/theme-app','core/modules/storage','theme/js/transitions',
 	//uses the 'screen-transition' action to render :
 	App.setParam( 'custom-screen-rendering', true );
 
-	App.action( 'screen-transition', function( $wrapper, $current, $next, current_screen, previous_screen, $deferred ) {
+	App.action( 'screen-transition', function( $wrapper, $current, $next, current_screen, next_screen, $deferred ) {
 
-		var direction = App.getTransitionDirection( current_screen, previous_screen );
+		var direction = App.getTransitionDirection( current_screen, next_screen );
 
 		switch ( direction ) {
 			case 'previous-screen':
